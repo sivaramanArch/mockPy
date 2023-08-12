@@ -36,8 +36,6 @@ class Repository:
 
 class AppContainer(containers.DeclarativeContainer):
     repository = providers.Singleton(Repository)
-    http_server = providers.Singleton(HttpServer)
-
-    # path, server, repo
-    api_configurer = providers.Factory(
-        ApiConfigurer, "api.yaml", http_server, repository)
+    server = providers.Singleton(HttpServer)
+    api_config = providers.Factory(
+        ApiConfigurer, "api.yaml", server, repository)

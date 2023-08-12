@@ -8,7 +8,6 @@ class ApiConfigurer:
         self.api_config_path = path
         self.server = server
         self.repo = repo
-        self.configure_api()
 
     def process_domain(self, domain):
         id = domain.get("id", None)
@@ -37,6 +36,6 @@ class ApiConfigurer:
         for domain in domains:
             self.traverse_domain(domain)
 
-    def configure_api(self):
+    def setup(self):
         with open(self.api_config_path, 'r') as api_config:
             self.traverse_config(yaml.safe_load(api_config))
