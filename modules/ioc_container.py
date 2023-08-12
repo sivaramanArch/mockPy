@@ -2,6 +2,7 @@ from dependency_injector import containers, providers
 import falcon
 from modules import DB_Handler
 from wsgiref import simple_server
+from modules import ApiConfigurer
 
 
 class HttpServer:
@@ -11,9 +12,10 @@ class HttpServer:
     def add_route(self, route, resource) -> None:
         self.app.add_route(route, resource=resource)
 
-    def launch(self):
-        httpd = simple_server.make_server('127.0.0.1', 8000, self.app)
-        print("Serving on http://127.0.0.1:8000")
+    def launch(self, port=8080):
+        print(f"Server : [{self.app}]")
+        httpd = simple_server.make_server('127.0.0.1', port, self.app)
+        print(f"Serving on http://127.0.0.1:{port}")
         httpd.serve_forever()
 
 
@@ -34,4 +36,8 @@ class Repository:
 
 class AppContainer(containers.DeclarativeContainer):
     repository = providers.Singleton(Repository)
-    http_server = providers.Factory(HttpServer)
+    http_server = providers.Singleton(HttpServer)
+
+    # path, server, repo
+    api_configurer = providers.Factory(
+        ApiConfigurer, "api.yaml", http_server, repository)
