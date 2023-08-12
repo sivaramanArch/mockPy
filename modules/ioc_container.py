@@ -2,7 +2,7 @@ from dependency_injector import containers, providers
 import falcon
 from modules import DB_Handler
 from wsgiref import simple_server
-from modules import ApiConfigurer
+from modules import BootstrapService
 
 
 class HttpServer:
@@ -10,6 +10,7 @@ class HttpServer:
         self.app = falcon.App()
 
     def add_route(self, route, resource) -> None:
+        print(f"Registering route : {route}")
         self.app.add_route(route, resource=resource)
 
     def launch(self, port=8080):
@@ -38,4 +39,4 @@ class AppContainer(containers.DeclarativeContainer):
     repository = providers.Singleton(Repository)
     server = providers.Singleton(HttpServer)
     api_config = providers.Factory(
-        ApiConfigurer, "api.yaml", server, repository)
+        BootstrapService, "api.yaml", server, repository)
