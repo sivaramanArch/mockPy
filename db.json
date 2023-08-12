@@ -1,0 +1,26 @@
+{
+    "book_id": [
+        {
+            "id": 1,
+            "name": "foo"
+        },
+        {
+            "id": 3,
+            "name": "baz"
+        }
+    ],
+    "user_id": [
+        {
+            "id": 3,
+            "name": "fooman"
+        },
+        {
+            "id": 4,
+            "name": "barman"
+        },
+        {
+            "id": 5,
+            "name": "zeeman"
+        }
+    ]
+}

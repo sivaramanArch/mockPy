@@ -1,0 +1,13 @@
+domain:
+  - book:
+      schema: { id: "string", name: "string" }
+      resource_identifier: [id, name]
+      expose: [GET, POST]
+      slug: /books
+      id: "book_id"
+  - user:
+      schema: { id: "string", name: "string" }
+      resource_identifier: [id, name]
+      expose: [GET, POST]
+      slug: /user
+      id: user_id
