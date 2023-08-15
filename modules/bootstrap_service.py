@@ -37,6 +37,8 @@ class BootstrapService:
         methods = domain.get("expose", [])
         tuple_id = domain.get("uuid", None)
 
+        self.repo.create_key(id)
+
         resource = DynamicHttpController(id, methods, self.repo, tuple_id)
 
         self.server.add_route(route, resource)

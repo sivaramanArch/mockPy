@@ -24,6 +24,9 @@ class Repository:
         self.db_path = "db.json"
         self.driver = DB_Handler(self.db_path)
 
+    def create_key(self, key_name):
+        return self.driver.create_key(key_name)
+
     def get(self):
         return self.driver.get_all()
 

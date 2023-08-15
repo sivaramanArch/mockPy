@@ -33,32 +33,6 @@
             "name": "jazz"
         }
     ],
-    "user_id": [
-        {
-            "id": 4,
-            "name": "barman"
-        },
-        {
-            "id": 5,
-            "name": "zeeman"
-        },
-        {
-            "id": 6,
-            "name": "loner"
-        },
-        {
-            "id": 7,
-            "name": "loner"
-        },
-        {
-            "id": 7,
-            "name": "dave"
-        },
-        {
-            "id": 3,
-            "name": "fooman"
-        }
-    ],
     "author_id": [
         {
             "id": 1,
@@ -68,5 +42,6 @@
             "id": 1,
             "name": "jazz"
         }
-    ]
+    ],
+    "user_id": []
 }

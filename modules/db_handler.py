@@ -10,6 +10,16 @@ class DB_Handler:
         self.file_path = file_path
         self.indent = 4
 
+    def create_key(self, key_name):
+        all_records = self.get_all()
+
+        if key_name in all_records:
+            return
+
+        all_records[key_name] = []
+
+        self.refresh_store(data=all_records)
+
     def get_all(self):
         try:
             with open(self.file_path, 'r') as file:
