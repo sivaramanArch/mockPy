@@ -9,7 +9,8 @@ domain:
   - user:
       schema: { id: "string", name: "string" }
       resource_identifier: [id, name]
-      expose: [GET, POST]
+      uuid: id
+      expose: [GET, POST, DELETE]
       slug: /user
       id: user_id
   - author:

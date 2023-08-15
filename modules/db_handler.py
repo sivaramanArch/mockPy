@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 
 
 class DB_Handler:
@@ -39,3 +40,14 @@ class DB_Handler:
             data[key] = [new_object]
 
         self.refresh_store(data=data)
+
+    def delete(self, key, record):
+        if not isinstance(record, dict):
+            raise Exception("Object is expected to be a dict")
+
+        all_records = self.get_all()
+
+        if key in all_records and isinstance(all_records[key], list):
+            all_records[key] = [_ for _ in all_records[key] if _ != record]
+
+        self.refresh_store(data=all_records)

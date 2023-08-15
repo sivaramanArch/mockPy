@@ -33,6 +33,9 @@ class Repository:
     def insert(self, key, value):
         self.driver.write_by_key(key=key, new_object=value)
 
+    def delete(self, key, value):
+        self.driver.delete(key=key, record=value)
+
 
 class AppContainer(containers.DeclarativeContainer):
     repository = providers.Singleton(Repository)

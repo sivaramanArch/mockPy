@@ -35,10 +35,6 @@
     ],
     "user_id": [
         {
-            "id": 3,
-            "name": "fooman"
-        },
-        {
             "id": 4,
             "name": "barman"
         },
@@ -57,6 +53,10 @@
         {
             "id": 7,
             "name": "dave"
+        },
+        {
+            "id": 3,
+            "name": "fooman"
         }
     ],
     "author_id": [

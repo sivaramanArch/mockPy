@@ -28,9 +28,7 @@ class DynamicHttpController:
 
     def on_put(self, req, resp):
         if "PUT" not in self.methods:
-            resp.status = falcon.HTTP_403
-            resp.body = "Method not supported"
-            return
+            return self._handle_unsupported(resp)
 
         all_records: list = self.repo.get_by_key(self.id)
         data = json.loads(req.bounded_stream.read().decode('utf-8'))
@@ -46,6 +44,20 @@ class DynamicHttpController:
 
         else:
             self._insert(data, resp)
+
+    def on_delete(self, req, resp):
+        if "DELETE" not in self.methods:
+            return self._handle_unsupported(resp)
+
+        data = json.loads(req.bounded_stream.read().decode('utf-8'))
+        self.repo.delete(key=self.id, value=data)
+
+        resp.status = falcon.HTTP_200
+
+    def _handle_unsupported(self, resp):
+        resp.status = falcon.HTTP_403
+        resp.body = "Method not supported"
+        return
 
     def _insert(self, data, resp):
         resp.status = falcon.HTTP_201
