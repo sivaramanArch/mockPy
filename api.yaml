@@ -2,7 +2,8 @@ domain:
   - book:
       schema: { id: "string", name: "string" }
       resource_identifier: [id, name]
-      expose: [GET]
+      uuid: id
+      expose: [GET, PUT]
       slug: /books
       id: "book_id"
   - user:
