@@ -1,5 +1,6 @@
 import json
 from functools import lru_cache
+import os
 
 
 class DB_Handler:
@@ -7,11 +8,12 @@ class DB_Handler:
         if file_path == None:
             raise Exception("File path is mandatory")
 
+        self._ensure_file_exists(file_path)
         self.file_path = file_path
         self.indent = 4
 
     def create_key(self, key_name):
-        all_records = self.get_all()
+        all_records = self.get_all() or {}
 
         if key_name in all_records:
             return
@@ -61,3 +63,15 @@ class DB_Handler:
             all_records[key] = [_ for _ in all_records[key] if _ != record]
 
         self.refresh_store(data=all_records)
+
+    def _ensure_file_exists(self, file_path):
+        directory = os.path.dirname(file_path)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        if os.path.exists(file_path):
+            pass
+        else:
+            with open(file_path, "w") as _:
+                print(f"DB file '{file_path}' created.")

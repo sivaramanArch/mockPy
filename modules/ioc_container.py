@@ -1,8 +1,11 @@
+from typing import Any, Union
 from dependency_injector import containers, providers
+from dependency_injector.providers import Provider
 import falcon
-from modules import DB_Handler
 from wsgiref import simple_server
+from modules import DB_Handler
 from modules import BootstrapService
+from modules import AppLauncher
 
 
 class HttpServer:
@@ -20,8 +23,8 @@ class HttpServer:
 
 
 class Repository:
-    def __init__(self):
-        self.db_path = "db.json"
+    def __init__(self, app_launcher: AppLauncher):
+        self.db_path = app_launcher.get_db()
         self.driver = DB_Handler(self.db_path)
 
     def create_key(self, key_name):
@@ -41,7 +44,8 @@ class Repository:
 
 
 class AppContainer(containers.DeclarativeContainer):
-    repository = providers.Singleton(Repository)
+    app_launcher = providers.Singleton(AppLauncher)
+    repository = providers.Singleton(Repository, app_launcher)
     server = providers.Singleton(HttpServer)
     api_config = providers.Factory(
-        BootstrapService, "api.yaml", server, repository)
+        BootstrapService, app_launcher, server, repository)

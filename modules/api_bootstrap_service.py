@@ -1,10 +1,11 @@
 import yaml
 from modules import DynamicHttpController
+from modules import AppLauncher
 
 
 class BootstrapService:
-    def __init__(self, path, server, repo) -> None:
-        self.api_config_path = path
+    def __init__(self, app_launcher: AppLauncher, server, repo) -> None:
+        self.api_config_path = app_launcher.get_api_spec()
         self.server = server
         self.repo = repo
 
