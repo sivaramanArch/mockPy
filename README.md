@@ -17,17 +17,21 @@ It allows you to configure API routes, responses, and behaviours using YAML conf
    ```
 2. Configure: Update the file present in resources/api.yaml
 3. To create a new domain / api-resource
-4. Update the yaml add under domains section
-5. ```yaml
-   - book:
-      schema: { id: "string", name: "string" }
-      resource_identifier: [id, name]
-      uuid: id
-      expose: [GET, PUT]
-      slug: /books
-      id: "book_id"
+   - Update the yaml add under domains section
+   - ```yaml
+      - book:
+         schema: { id: "string", name: "string" }
+         resource_identifier: [id, name]
+         uuid: id
+         expose: [GET, PUT]
+         slug: /books
+         id: "book_id"
+      ```
+4. Save the file and launch the application by
+   ```bash
+   python app.py env.json
    ```
-6. 
-   
+
+      
 
 
