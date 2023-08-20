@@ -9,9 +9,9 @@ def main(config_file):
 
     container = AppContainer()
 
-    container.app_launcher(property_map)
+    app_launcher = container.app_launcher(property_map)
     container.api_config().setup()
-    container.server().launch()
+    container.server().launch(app_launcher)
 
 
 if __name__ == '__main__':

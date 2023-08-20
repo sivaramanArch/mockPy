@@ -16,7 +16,8 @@ class HttpServer:
         print(f"Registering route : {route}")
         self.app.add_route(route, resource=resource)
 
-    def launch(self, port=8080):
+    def launch(self, app_launcher: AppLauncher):
+        port = app_launcher.get_port_number()
         httpd = simple_server.make_server('127.0.0.1', port, self.app)
         print(f"Serving on http://127.0.0.1:{port}")
         httpd.serve_forever()
